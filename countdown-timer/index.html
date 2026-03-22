@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="manifest" href="manifest.json">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>倒计时器 - Countdown</title>
+  <style>
+    body { font-family: -apple-system, sans-serif; background: #1a1a2e; color: white; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
+    .container { text-align: center; width: 100%; max-width: 400px; }
+    .display { font-size: 72px; font-weight: 200; font-variant-numeric: tabular-nums; margin: 30px 0; letter-spacing: 4px; }
+    .display.running { color: #00d4aa; }
+    .display.paused { color: #ff9500; }
+    .display.done { color: #ff3b30; animation: pulse 1s infinite; }
+    @keyframes pulse { 50% { opacity: 0.5; } }
+    .input-group { margin-bottom: 16px; }
+    input { width: 100%; padding: 14px; border: none; border-radius: 12px; font-size: 18px; text-align: center; background: #16213e; color: white; }
+    .btn-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    button { padding: 16px; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; }
+    .btn-start { background: #00d4aa; color: #1a1a2e; }
+    .btn-pause { background: #ff9500; color: white; }
+    .btn-reset { background: #ff3b30; color: white; }
+    .presets { display: flex; gap: 8px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
+    .preset { padding: 8px 14px; border-radius: 20px; background: #16213e; font-size: 13px; cursor: pointer; border: 1px solid #333; }
+    .preset:hover { background: #0f3460; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>⏱️ 倒计时器</h1>
+    <div class="presets">
+      <div class="preset" onclick="setTime(1)">1分钟</div>
+      <div class="preset" onclick="setTime(3)">3分钟</div>
+      <div class="preset" onclick="setTime(5)">5分钟</div>
+      <div class="preset" onclick="setTime(10)">10分钟</div>
+      <div class="preset" onclick="setTime(15)">15分钟</div>
+      <div class="preset" onclick="setTime(25)">25分钟</div>
+    </div>
+    <div class="input-group">
+      <input type="number" id="minutes" placeholder="输入分钟数" min="1">
+    </div>
+    <div class="display" id="display">00:00</div>
+    <div class="btn-row">
+      <button class="btn-start" onclick="startTimer()">开始</button>
+      <button class="btn-pause" onclick="pauseTimer()">暂停</button>
+      <button class="btn-reset" onclick="resetTimer()">重置</button>
+    </div>
+  </div>
+  <script>
+    let remaining = 0, interval = null, isRunning = false;
+    function setTime(mins) { document.getElementById('minutes').value = mins; updateDisplay(); }
+    function updateDisplay() {
+      const m = Math.floor(remaining / 60), s = remaining % 60;
+      document.getElementById('display').textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    }
+    function startTimer() {
+      if (!isRunning) {
+        if (!remaining) remaining = parseInt(document.getElementById('minutes').value) * 60 || 0;
+        if (!remaining) return;
+        isRunning = true;
+        interval = setInterval(() => {
+          remaining--;
+          updateDisplay();
+          if (remaining <= 0) {
+            clearInterval(interval);
+            document.getElementById('display').classList.add('done');
+            new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2teleQsKj9TWuodMBgyU2teleQsKj9TWuodMBgyQ2d6mcQkKj9PcrotOAQyP1t6ncgkKkNTboYs+Ag==').play();
+          }
+        }, 1000);
+        document.getElementById('display').classList.add('running');
+      }
+    }
+    function pauseTimer() {
+      clearInterval(interval);
+      isRunning = false;
+      document.getElementById('display').classList.remove('running');
+      document.getElementById('display').classList.add('paused');
+    }
+    function resetTimer() {
+      clearInterval(interval);
+      isRunning = false;
+      remaining = parseInt(document.getElementById('minutes').value) * 60 || 0;
+      updateDisplay();
+      document.getElementById('display').className = 'display';
+    }
+  </script>
+</body>
+</html>

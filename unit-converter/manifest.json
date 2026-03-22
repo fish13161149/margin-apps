@@ -1,0 +1,20 @@
+{
+  "name": "单位换算器",
+  "short_name": "unit-converter",
+  "description": "单位换算器 - 简单实用的生活工具",
+  "start_url": "/unit-converter/index.html",
+  "display": "standalone",
+  "background_color": "#4285F4",
+  "theme_color": "#4285F4",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["utilities", "finance"],
+  "lang": "zh-CN"
+}

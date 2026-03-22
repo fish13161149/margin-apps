@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="manifest" href="manifest.json">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>单位换算 - UnitCalc</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f0f0f5; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; }
+    .container { background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); padding: 28px; width: 100%; max-width: 380px; }
+    h1 { font-size: 18px; color: #1a1a1a; margin-bottom: 20px; text-align: center; }
+    select { width: 100%; padding: 14px; border: 2px solid #e5e5e5; border-radius: 10px; font-size: 15px; margin-bottom: 16px; background: white; }
+    select:focus { outline: none; border-color: #007aff; }
+    .input-group { margin-bottom: 14px; }
+    label { display: block; font-size: 13px; color: #666; margin-bottom: 6px; }
+    input { width: 100%; padding: 12px; border: 2px solid #e5e5e5; border-radius: 10px; font-size: 16px; }
+    input:focus { outline: none; border-color: #007aff; }
+    button { width: 100%; padding: 14px; background: #007aff; color: white; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 8px; }
+    .result { margin-top: 20px; padding: 16px; background: #f8f9fa; border-radius: 10px; display: none; }
+    .result.show { display: block; }
+    .result-row { padding: 8px 0; border-bottom: 1px solid #e5e5e5; display: flex; justify-content: space-between; }
+    .result-row:last-child { border: none; }
+    .result-label { color: #666; }
+    .result-value { font-weight: 600; color: #1a1a1a; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📐 单位换算器</h1>
+    <select id="type" onchange="updateUnits()">
+      <option value="length">长度</option>
+      <option value="weight">重量</option>
+      <option value="temperature">温度</option>
+      <option value="area">面积</option>
+    </select>
+    <div class="input-group">
+      <label>输入值</label>
+      <input type="number" id="inputValue" placeholder="输入数值">
+    </div>
+    <div class="input-group">
+      <label>从</label>
+      <select id="fromUnit"></select>
+    </div>
+    <div class="input-group">
+      <label>转换为</label>
+      <select id="toUnit"></select>
+    </div>
+    <button onclick="convert()">换算</button>
+    <div class="result" id="result">
+      <div class="result-row"><span class="result-label">结果</span><span class="result-value" id="outputValue">-</span></div>
+    </div>
+  </div>
+  <script>
+    const units = {
+      length: { '米 (m)': 1, '厘米 (cm)': 0.01, '毫米 (mm)': 0.001, '英尺 (ft)': 0.3048, '英寸 (in)': 0.0254, '码 (yd)': 0.9144 },
+      weight: { '千克 (kg)': 1, '克 (g)': 0.001, '毫克 (mg)': 0.000001, '磅 (lb)': 0.453592, '盎司 (oz)': 0.0283495 },
+      area: { '平方米 (m²)': 1, '平方厘米 (cm²)': 0.0001, '平方英尺 (ft²)': 0.092903, '平方英寸 (in²)': 0.00064516, '亩': 666.67 },
+      temperature: { '摄氏度 (°C)': 'C', '华氏度 (°F)': 'F', '开尔文 (K)': 'K' }
+    };
+    function updateUnits() {
+      const type = document.getElementById('type').value;
+      const opts = Object.keys(units[type]);
+      document.getElementById('fromUnit').innerHTML = opts.map(u => `<option value="${u}">${u}</option>`).join('');
+      document.getElementById('toUnit').innerHTML = opts.map(u => `<option value="${u}">${u}</option>`).join('');
+    }
+    function convert() {
+      const type = document.getElementById('type').value;
+      const val = parseFloat(document.getElementById('inputValue').value);
+      const from = document.getElementById('fromUnit').value;
+      const to = document.getElementById('toUnit').value;
+      let result;
+      if (type === 'temperature') {
+        let c;
+        if (units.temperature[from] === 'C') c = val;
+        else if (units.temperature[from] === 'F') c = (val - 32) * 5/9;
+        else c = val - 273.15;
+        if (units.temperature[to] === 'C') result = c;
+        else if (units.temperature[to] === 'F') result = c * 9/5 + 32;
+        else result = c + 273.15;
+      } else {
+        result = val * (units[type][from] / units[type][to]);
+      }
+      document.getElementById('outputValue').textContent = result.toFixed(6).replace(/\.?0+$/, '');
+      document.getElementById('result').classList.add('show');
+    }
+    updateUnits();
+  </script>
+</body>
+</html>
