@@ -1,11 +1,11 @@
 {
-  "name": "Amazon利润计算器",
-  "short_name": "margin-calc",
-  "description": "Amazon利润计算器 - 简单实用的生活工具",
+  "name": "储蓄利息计算器",
+  "short_name": "savings-calc",
+  "description": "储蓄利息计算器 - 简单实用的生活工具",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#FF9900",
+  "theme_color": "#43A047",
   "orientation": "portrait",
   "icons": [
     {

@@ -1,11 +1,11 @@
 {
-  "name": "Amazon利润计算器",
-  "short_name": "margin-calc",
-  "description": "Amazon利润计算器 - 简单实用的生活工具",
+  "name": "卡路里计算器",
+  "short_name": "calorie-calc",
+  "description": "卡路里计算器 - 简单实用的生活工具",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#FF9900",
+  "theme_color": "#FF7043",
   "orientation": "portrait",
   "icons": [
     {

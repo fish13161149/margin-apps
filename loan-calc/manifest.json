@@ -1,11 +1,11 @@
 {
-  "name": "Amazon利润计算器",
-  "short_name": "margin-calc",
-  "description": "Amazon利润计算器 - 简单实用的生活工具",
+  "name": "贷款计算器",
+  "short_name": "loan-calc",
+  "description": "贷款计算器 - 简单实用的生活工具",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#FF9900",
+  "theme_color": "#E53935",
   "orientation": "portrait",
   "icons": [
     {

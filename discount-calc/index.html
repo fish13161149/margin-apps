@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>打折计算器</title>
+  <link rel="manifest" href="manifest.json">
+  <style>body{font-family:-apple-system,sans-serif;background:#f5f5f5;min-height:100vh;display:flex;justify-content:center;padding:20px}.container{background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,0.1);padding:24px;width:100%;max-width:400px}h1{font-size:18px;text-align:center;margin-bottom:20px}.input-group{margin-bottom:16px}label{display:block;font-size:13px;color:#666;margin-bottom:6px}input{width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:16px}button{width:100%;padding:14px;background:#00ACC1;color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:600;cursor:pointer;margin-top:8px}.result{margin-top:20px;padding:16px;background:#e6fafb;border-radius:8px;display:none}.result.show{display:block}.row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee}.row:last-child{border:none;font-weight:700;font-size:18px;color:#00ACC1}</style>
+</head>
+<body>
+<div class="container">
+<h1>🏷️ 打折计算器</h1>
+<div class="input-group"><label>原价（元）</label><input type="number" id="price" placeholder="例如：299"></div>
+<div class="input-group"><label>折扣</label><input type="number" id="discount" placeholder="例如：8" value="8.8"></div>
+<div class="input-group"><label>额外减价（元，可选）</label><input type="number" id="minus" value="0"></div>
+<button onclick="calc()">计算</button>
+<div class="result" id="result">
+<div class="row"><span>折扣价</span><span id="final"></span></div>
+<div class="row"><span>节省</span><span id="save"></span></div>
+</div>
+</div>
+<script>function calc(){var p=parseFloat(document.getElementById('price').value);var d=parseFloat(document.getElementById('discount').value);var m=parseFloat(document.getElementById('minus').value)||0;if(!p||!d){alert('请填写完整');return}var final=p*d/10-m;var save=p-final;if(final<0)final=0;document.getElementById('final').textContent='¥'+final.toFixed(2);document.getElementById('save').textContent='¥'+save.toFixed(2);document.getElementById('result').classList.add('show')}</script>
+</body>
+</html>

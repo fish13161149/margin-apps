@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>房贷计算器</title>
+  <link rel="manifest" href="manifest.json">
+  <style>body{font-family:-apple-system,sans-serif;background:#f5f5f5;min-height:100vh;display:flex;justify-content:center;padding:20px}.container{background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,0.1);padding:24px;width:100%;max-width:400px}h1{font-size:18px;text-align:center;margin-bottom:20px}.input-group{margin-bottom:16px}label{display:block;font-size:13px;color:#666;margin-bottom:6px}input,select{width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:16px}button{width:100%;padding:14px;background:#1E88E5;color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:600;cursor:pointer;margin-top:8px}.result{margin-top:20px;padding:16px;background:#f3f7fb;border-radius:8px;display:none}.result.show{display:block}.row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee}.row:last-child{border:none;font-weight:700;font-size:18px;color:#1E88E5}</style>
+</head>
+<body>
+<div class="container">
+<h1>🏠 房贷计算器</h1>
+<div class="input-group"><label>贷款金额（万）</label><input type="number" id="amount" placeholder="例如：100"></div>
+<div class="input-group"><label>贷款期限（年）</label><input type="number" id="years" value="30"></div>
+<div class="input-group"><label>商贷利率（%）</label><input type="number" id="rate" value="4.2" step="0.01"></div>
+<div class="input-group"><label>还款方式</label><select id="type"><option value="1">等额本息</option><option value="2">等额本金</option></select></div>
+<button onclick="calc()">计算</button>
+<div class="result" id="result">
+<div class="row"><span>月供</span><span id="monthly"></span></div>
+<div class="row"><span>总利息</span><span id="interest"></span></div>
+<div class="row"><span>还款总额</span><span id="total"></span></div>
+</div>
+</div>
+<script>function calc(){var a=parseFloat(document.getElementById('amount').value)*10000;var y=parseInt(document.getElementById('years').value);var r=parseFloat(document.getElementById('rate').value)/100/12;var t=parseInt(document.getElementById('type').value);if(!a||!y||!r){alert('请填写完整');return}var m,ti,to;if(t==1){m=a*r*Math.pow(1+r,y*12)/(Math.pow(1+r,y*12)-1);to=m*y*12;ti=to-a}else{var first=a/(y*12)+a*r;var last=a/(y*12)+a*r/(y*12);m=(first+last)/2;to=a*y*12*(1+r)/2;ti=to-a}document.getElementById('monthly').textContent='¥'+m.toFixed(2);document.getElementById('interest').textContent='¥'+ti.toFixed(2);document.getElementById('total').textContent='¥'+to.toFixed(2);document.getElementById('result').classList.add('show')}</script>
+</body>
+</html>
