@@ -1,21 +1,26 @@
 {
-  "name": "混凝土用量计算器",
-  "short_name": "concrete-calc",
-  "description": "混凝土用量计算器 - 简单实用的生活工具",
+  "name": "concrete-calc",
+  "short_name": "concrete-cal",
+  "description": "concrete-calc - 实用工具",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#5D4037",
+  "theme_color": "#000000",
   "orientation": "portrait",
   "icons": [
     {
       "src": "./icon.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
+    },
+    {
+      "src": "./icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ],
   "categories": ["utilities", "finance"],
   "lang": "zh-CN",
-  "scope": "./"
+  "scope": "./",
+  "prefer_related_applications": false
 }

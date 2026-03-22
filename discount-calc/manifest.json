@@ -1,21 +1,26 @@
 {
-  "name": "打折计算器",
-  "short_name": "discount-calc",
-  "description": "打折计算器 - 简单实用的生活工具",
+  "name": "discount-calc",
+  "short_name": "discount-cal",
+  "description": "discount-calc - 实用工具",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#00ACC1",
+  "theme_color": "#000000",
   "orientation": "portrait",
   "icons": [
     {
       "src": "./icon.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
+    },
+    {
+      "src": "./icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ],
   "categories": ["utilities", "finance"],
   "lang": "zh-CN",
-  "scope": "./"
+  "scope": "./",
+  "prefer_related_applications": false
 }

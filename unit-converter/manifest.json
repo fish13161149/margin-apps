@@ -1,21 +1,26 @@
 {
-  "name": "单位换算器",
-  "short_name": "unit-converter",
-  "description": "单位换算器 - 简单实用的生活工具",
+  "name": "unit-converter",
+  "short_name": "unit-convert",
+  "description": "unit-converter - 实用工具",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#4285F4",
+  "theme_color": "#000000",
   "orientation": "portrait",
   "icons": [
     {
       "src": "./icon.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
+    },
+    {
+      "src": "./icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ],
   "categories": ["utilities", "finance"],
   "lang": "zh-CN",
-  "scope": "./"
+  "scope": "./",
+  "prefer_related_applications": false
 }
